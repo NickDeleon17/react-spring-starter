@@ -20,7 +20,7 @@ const HomePage = () => {
             <Stack alignItems='center' padding='2em' gap={2}>
                 <Button variant="outlined" color='primary'
                         onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
+                    click me daddy {count}
                 </Button>
             </Stack>
             <Typography variant='h5' color={grey[500]} paddingBottom={2}>

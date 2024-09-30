@@ -8,6 +8,7 @@ export type ToDo = {
 
 type CreateToDo = (text: string) => Promise<ToDo>;
 type FetchToDos = () => Promise<ToDo[]>;
+type DeleteToDo = (id: number) => Promise<void>;
 
 export const createToDo: CreateToDo = (text) => (
     axios.post('/api/todos', {text, status: 'active'})
@@ -18,3 +19,14 @@ export const fetchToDos: FetchToDos = () => (
     axios.get('/api/todos')
         .then((r: AxiosResponse<ToDo[]>) => r.data)
 )
+
+
+//bring into existance the deleteToDo function here.
+//update the signature of the deleteToDo function to include a parameter of time number
+export const deleteToDo: DeleteToDo = (id: number) => (
+    axios.delete(`/api/todos/${id}`)
+        .then((r) => r.data)
+)
+
+
+

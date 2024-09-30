@@ -20,13 +20,18 @@ export const ToDoListPage = () => {
         }
     }
 
+    const updateToDos = () => {
+        fetchToDos().then(setToDos);
+    };
+
+
     return (
         <Stack p={4} height='100vh'>
             <Stack mt={7} pb={1} flex='1' overflow='auto'>
-                <Typography variant='h5' fontWeight={600}>Your To Do List</Typography>
+                <Typography variant='h5' fontWeight={600}>Your Honey Do List</Typography>
                 <List>
                     {toDos.map(toDo => (
-                        <ToDoCard key={toDo.id + toDo.text} initialToDo={toDo}/>
+                        <ToDoCard updateToDos={updateToDos} key={toDo.id + toDo.text} initialToDo={toDo}/>
                     ))}
                 </List>
             </Stack>

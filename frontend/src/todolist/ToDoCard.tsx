@@ -1,11 +1,12 @@
-import {ToDo} from "./ToDoService";
+import {deleteToDo, ToDo} from "./ToDoService";
 import {Checkbox, IconButton, ListItem, ListItemButton, ListItemIcon, Typography} from "@mui/material";
 import {grey} from "@mui/material/colors";
 import {DeleteOutline} from "@mui/icons-material";
-import {useState} from "react";
+// @ts-ignore
+import React, {useState} from "react";
 
-type ToDoProps = { initialToDo: ToDo };
-export const ToDoCard = ({initialToDo}: ToDoProps) => {
+type ToDoProps = { initialToDo: ToDo; updateToDos:()=> void };
+export const ToDoCard = ({initialToDo, updateToDos}: ToDoProps) => {
 
     const [toDo, setToDo] = useState<ToDo>(initialToDo);
 
@@ -16,14 +17,26 @@ export const ToDoCard = ({initialToDo}: ToDoProps) => {
         }))
     }
 
+
+
+
     return (
         <ListItem
             sx={{mt: 1, borderRadius: 1, backgroundColor: grey[900], overflow: "hidden"}}
             secondaryAction={
-                <IconButton color="error" edge="end" aria-label="comments">
+//for the delete button, change the aria-label style to "delete-button" to match test userEvent ... .getByLabelText
+//include onClick to delete button to handle the click event by the deleteToDo function
+                <IconButton
+                    onClick={() => {
+                        toDo.id && deleteToDo(toDo.id).then(updateToDos)
+                    }}
+                    color="error"
+                    edge="end"
+                    aria-label="delete-button">
                     <DeleteOutline/>
                 </IconButton>
             }
+
             disablePadding>
             <ListItemButton
                 role={undefined}
